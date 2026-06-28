@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "▶ Lancer TaskFlow",
+      "program": "${workspaceFolder}/Team01_Project/backend/server.js",
+      "cwd": "${workspaceFolder}/Team01_Project/backend",
+      "env": {
+        "PORT": "3000"
+      },
+      "console": "integratedTerminal",
+      "restart": true
+    }
+  ]
+}

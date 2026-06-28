@@ -1,0 +1,94 @@
+ID,Work Item Type,Title,State,Priority,Story Points,Description,Acceptance Criteria,Parent ID
+1,Epic,User Authentication,Done,1,,Users can register and log in to the system using email and password.,,
+2,Epic,Task Management,Done,1,,Users can create read update and delete their personal tasks.,,
+3,Epic,Task Filtering & Search,Done,2,,Users can filter and search their task list.,,
+4,Epic,Category Management,Done,2,,Users can organise tasks using custom categories.,,
+10,Feature,User Registration,Done,1,,Allow new users to create an account.,User can register with username / email / password.,1
+11,Feature,User Login,Done,1,,Allow registered users to log in.,User receives a JWT token on success.,1
+20,Feature,Task CRUD Operations,Done,1,,Full create-read-update-delete for tasks.,All four operations work via REST API.,2
+21,Feature,Task Status Toggle,Done,2,,One-click toggle to mark a task as done/undone.,Checkbox on task card changes status immediately.,2
+30,Feature,Filter Tasks,Done,2,,Filter the task list by status and priority.,Dropdowns in sidebar filter the task list in real time.,3
+31,Feature,Search Tasks,Done,2,,Keyword search on task titles.,Search box filters tasks with 300 ms debounce.,3
+40,Feature,Manage Categories,Done,2,,Create and delete user-defined categories.,Categories appear in sidebar and in task form dropdowns.,4
+41,Feature,Assign Category to Task,Done,2,,Link a category to a task.,Category name shown on task card.,4
+100,User Story,Register with valid credentials,Done,1,3,"As a new user I want to register with username / email / password so that I can log in later.","- Registration form accepts username, email, password
+- Password must be at least 6 characters
+- Success redirects to dashboard
+- Duplicate email shows error",10
+101,User Story,Prevent duplicate registration,Done,1,2,As a user I want the system to reject duplicate email/username so that accounts are unique.,"- Duplicate email returns HTTP 409
+- Duplicate username returns HTTP 409
+- Error message is shown in UI",10
+102,User Story,Login with valid credentials,Done,1,3,"As a registered user I want to log in with email and password so that I can access my tasks.","- Correct credentials return JWT token
+- Token stored in localStorage
+- Redirect to dashboard on success",11
+103,User Story,Reject invalid login,Done,1,2,As a user I want the system to reject wrong credentials so that my account is secure.,"- Wrong password returns HTTP 401
+- Non-existent email returns HTTP 401
+- Error message shown in UI",11
+104,User Story,Logout,Done,2,1,As a user I want to log out so that my session is cleared.,"- Logout button visible in navbar
+- Clicking logout clears localStorage and redirects to login",11
+200,User Story,Create a task,Done,1,3,"As a user I want to create a task with title, description, priority, and due date.","- Title is required
+- Status defaults to 'To Do'
+- Priority defaults to 'Medium'
+- New task appears at top of list",20
+201,User Story,View all my tasks,Done,1,2,As a user I want to see all my tasks listed on the dashboard.,"- All tasks shown ordered by creation date desc
+- Each card shows title, status badge, priority badge
+- Stats row shows counts",20
+202,User Story,Edit a task,Done,1,3,As a user I want to edit any field of an existing task.,"- Clicking task card opens edit modal pre-filled
+- All fields are editable
+- Save updates the task and refreshes list",20
+203,User Story,Delete a task,Done,1,2,As a user I want to delete a task I no longer need.,"- Delete button in edit modal
+- Confirmation required before deleting
+- Task removed from list after delete",20
+204,User Story,Mark task as done,Done,2,2,As a user I want to toggle a task's status to done with one click.,"- Checkbox on task card
+- Clicking changes status between todo and done
+- Visual strikethrough applied to done tasks",21
+300,User Story,Filter by status,Done,2,2,As a user I want to filter tasks by status to focus on what matters.,"- Status dropdown in sidebar
+- Selecting status calls API with ?status= param
+- Empty state shown when no tasks match",30
+301,User Story,Filter by priority,Done,2,2,As a user I want to filter tasks by priority level.,"- Priority dropdown in sidebar
+- Selecting priority calls API with ?priority= param",30
+302,User Story,Search tasks by title,Done,2,2,As a user I want to search tasks by keyword so I can quickly find a specific task.,"- Search box at top of content area
+- Debounced 300 ms after user stops typing
+- Calls API with ?search= param",31
+400,User Story,Create a category,Done,2,2,As a user I want to create a named category to group tasks.,"- Category name input + Add button in sidebar
+- Empty name rejected
+- New category appears in sidebar list and form dropdowns",40
+401,User Story,Delete a category,Done,2,2,As a user I want to delete a category I no longer need.,"- × button next to each category in sidebar
+- Deleted category cleared from tasks (ON DELETE SET NULL)
+- Dropdowns updated immediately",40
+402,User Story,Assign category to task,Done,2,2,As a user I want to assign a category to a task during creation or editing.,"- Category dropdown in task modal
+- Category name shown as badge on task card
+- Can be changed to None",41
+500,Task,Set up Node.js Express project,Done,1,,Initialize package.json and install dependencies (express / better-sqlite3 / bcryptjs / jsonwebtoken / cors).,,10
+501,Task,Create SQLite database schema,Done,1,,Write database.js with users / categories / tasks tables and foreign key constraints.,,20
+502,Task,Implement auth routes,Done,1,,Create routes/auth.js with POST /register and POST /login.,,100
+503,Task,Implement JWT middleware,Done,1,,Create middleware/authMiddleware.js to verify Bearer tokens.,,102
+504,Task,Implement task routes,Done,1,,Create routes/tasks.js with GET / POST / PUT / DELETE endpoints.,,200
+505,Task,Implement category routes,Done,1,,Create routes/categories.js with GET / POST / DELETE endpoints.,,400
+506,Task,Build login HTML page,Done,2,,Create frontend/index.html with login form and error display.,,102
+507,Task,Build register HTML page,Done,2,,Create frontend/register.html with registration form.,,100
+508,Task,Build dashboard HTML page,Done,1,,Create frontend/dashboard.html with sidebar / content layout / task modal.,,201
+509,Task,Write CSS styles,Done,2,,Create frontend/css/style.css with responsive layout.,,201
+510,Task,Write JavaScript – api.js,Done,1,,Create frontend/js/api.js with fetch wrapper for all backend endpoints.,,504
+511,Task,Write JavaScript – dashboard.js,Done,1,,Create frontend/js/dashboard.js for task and category rendering and interactions.,,201
+512,Task,Write unit tests – auth,Done,1,,Write tests/auth.test.js covering register and login edge cases.,,100
+513,Task,Write unit tests – tasks,Done,1,,Write tests/tasks.test.js covering CRUD and filter operations.,,200
+600,Test Case,TC-01: Register with valid data,Done,1,,Verify that a new user can register with valid unique credentials.,"Steps: POST /api/auth/register with {username:alice,email:alice@test.com,password:secret123}; Expected: HTTP 201, body contains token and username",100
+601,Test Case,TC-02: Register with missing fields,Done,1,,Verify that registration fails when required fields are absent.,"Steps: POST /api/auth/register with {username:alice}; Expected: HTTP 400, body contains error",100
+602,Test Case,TC-03: Register with short password,Done,1,,Verify that registration fails when password is shorter than 6 characters.,"Steps: POST /api/auth/register with password=123; Expected: HTTP 400",100
+603,Test Case,TC-04: Register with duplicate email,Done,1,,Verify that registration rejects a duplicate email.,"Steps: Register alice@test.com twice; Expected: second call returns HTTP 409",101
+604,Test Case,TC-05: Login with valid credentials,Done,1,,Verify that an existing user can log in.,"Steps: POST /api/auth/login with correct email and password; Expected: HTTP 200, token in response",102
+605,Test Case,TC-06: Login with wrong password,Done,1,,Verify that login fails with an incorrect password.,"Steps: POST /api/auth/login with wrong password; Expected: HTTP 401",103
+606,Test Case,TC-07: Login with unknown email,Done,1,,Verify that login fails for a non-existent email.,"Steps: POST /api/auth/login with ghost@test.com; Expected: HTTP 401",103
+607,Test Case,TC-08: Create task with valid title,Done,1,,Verify that an authenticated user can create a task.,"Steps: POST /api/tasks with {title:Buy milk}; Expected: HTTP 201, task in response with status=todo",200
+608,Test Case,TC-09: Create task without title,Done,1,,Verify that task creation fails without a title.,"Steps: POST /api/tasks with {} ; Expected: HTTP 400",200
+609,Test Case,TC-10: Create task without auth,Done,1,,Verify that unauthenticated task creation is rejected.,"Steps: POST /api/tasks without Authorization header; Expected: HTTP 401",200
+610,Test Case,TC-11: Get all tasks,Done,2,,Verify that all tasks for the user are returned.,"Steps: Create 2 tasks, GET /api/tasks; Expected: HTTP 200, array length 2",201
+611,Test Case,TC-12: Filter tasks by status,Done,2,,Verify that status filter returns only matching tasks.,"Steps: Create tasks with different statuses, GET /api/tasks?status=done; Expected: only done tasks returned",300
+612,Test Case,TC-13: Filter tasks by priority,Done,2,,Verify that priority filter works.,"Steps: Create tasks with different priorities, GET /api/tasks?priority=high; Expected: only high tasks returned",301
+613,Test Case,TC-14: Search tasks by title,Done,2,,Verify that search returns tasks matching the keyword.,"Steps: Create tasks with different titles, GET /api/tasks?search=milk; Expected: only matching task returned",302
+614,Test Case,TC-15: Update task,Done,1,,Verify that a task can be updated.,"Steps: PUT /api/tasks/:id with {title:Updated,status:done}; Expected: HTTP 200, updated fields reflected",202
+615,Test Case,TC-16: Update non-existent task,Done,1,,Verify that updating a missing task returns 404.,"Steps: PUT /api/tasks/99999; Expected: HTTP 404",202
+616,Test Case,TC-17: Delete task,Done,1,,Verify that a task can be deleted.,"Steps: DELETE /api/tasks/:id; Expected: HTTP 200",203
+617,Test Case,TC-18: Delete same task twice,Done,1,,Verify that second delete returns 404.,"Steps: DELETE /api/tasks/:id twice; Expected: second call returns HTTP 404",203
+618,Test Case,TC-19: Cannot delete another user's task,Done,1,,Verify cross-user task isolation.,"Steps: Create task as user A, attempt DELETE as user B; Expected: HTTP 404",203

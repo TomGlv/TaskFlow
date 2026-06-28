@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Team01 – Functionality Specification</title>
+<style>
+  body{font-family:Arial,sans-serif;max-width:900px;margin:40px auto;color:#1e293b;line-height:1.6;padding:0 20px}
+  h1{color:#4f46e5;border-bottom:3px solid #4f46e5;padding-bottom:10px}
+  h2{color:#1e293b;border-bottom:1px solid #e2e8f0;padding-bottom:6px;margin-top:36px}
+  h3{color:#4f46e5;margin-top:24px}
+  table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+  th{background:#4f46e5;color:#fff;padding:10px 12px;text-align:left}
+  td{padding:9px 12px;border:1px solid #e2e8f0;vertical-align:top}
+  tr:nth-child(even) td{background:#f8fafc}
+  .badge{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600}
+  .must{background:#fee2e2;color:#991b1b}.should{background:#fef3c7;color:#92400e}
+  .could{background:#dcfce7;color:#166534}
+  .cover{text-align:center;padding:60px 0;border:2px solid #e2e8f0;border-radius:12px;margin-bottom:40px}
+  .cover h1{border:none;font-size:32px}.cover p{color:#64748b}
+  @media print{body{max-width:100%;margin:20px}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>Functionality Specification</h1>
+  <p><strong>Project:</strong> TaskFlow – Task Management System</p>
+  <p><strong>Team:</strong> Team 01</p>
+  <p><strong>Program:</strong> Applied Computing / Software Engineering</p>
+  <p><strong>Date:</strong> June 2026</p>
+</div>
+
+<h1>1. Introduction</h1>
+<p>This document describes the functional and non-functional requirements for <strong>TaskFlow</strong>, a web-based personal task management application. TaskFlow enables registered users to organise their work by creating, tracking, and categorising tasks.</p>
+
+<h2>1.1 Purpose</h2>
+<p>The purpose of this document is to provide a complete specification of the system behaviour so that developers, testers, and stakeholders share a common understanding of what the application must do.</p>
+
+<h2>1.2 Scope</h2>
+<p>TaskFlow covers: user account management, full task CRUD operations, task filtering and search, and category management. The initial release targets desktop and mobile web browsers.</p>
+
+<h2>1.3 Definitions</h2>
+<table>
+  <tr><th>Term</th><th>Definition</th></tr>
+  <tr><td>Task</td><td>A unit of work with a title, description, status, priority, optional due date, and optional category.</td></tr>
+  <tr><td>Category</td><td>A user-defined label used to group related tasks.</td></tr>
+  <tr><td>Status</td><td>The current state of a task: <em>To Do</em>, <em>In Progress</em>, or <em>Done</em>.</td></tr>
+  <tr><td>Priority</td><td>The urgency level of a task: <em>Low</em>, <em>Medium</em>, or <em>High</em>.</td></tr>
+  <tr><td>JWT</td><td>JSON Web Token — a signed token used to authenticate API requests.</td></tr>
+  <tr><td>REST API</td><td>The HTTP-based backend interface consumed by the frontend.</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h1>2. Functional Requirements</h1>
+
+<h2>2.1 User Authentication</h2>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-01</td><td>The system shall allow a visitor to register by providing a unique username, a unique email address, and a password of at least 6 characters.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-02</td><td>The system shall hash passwords using bcrypt before storing them in the database.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-03</td><td>The system shall allow a registered user to log in using their email address and password.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-04</td><td>Upon successful login or registration, the system shall issue a JWT valid for 24 hours.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-05</td><td>The system shall allow a logged-in user to log out, clearing the client-side session token.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-06</td><td>Protected API endpoints shall return HTTP 401 when no valid token is provided.</td><td><span class="badge must">MUST</span></td></tr>
+</table>
+
+<h2>2.2 Task Management</h2>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-07</td><td>An authenticated user shall be able to create a task by providing at minimum a title. The system shall default status to <em>To Do</em> and priority to <em>Medium</em>.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-08</td><td>An authenticated user shall be able to view a list of all their tasks ordered by creation date descending.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-09</td><td>An authenticated user shall be able to update any field of their own task.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-10</td><td>An authenticated user shall be able to delete their own task.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-11</td><td>An authenticated user shall be able to mark a task as <em>Done</em> with a single click.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-12</td><td>The system shall prevent a user from accessing or modifying another user's tasks.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-13</td><td>An authenticated user shall be able to set an optional due date on a task.</td><td><span class="badge should">SHOULD</span></td></tr>
+  <tr><td>FR-14</td><td>An authenticated user shall be able to add an optional description to a task.</td><td><span class="badge should">SHOULD</span></td></tr>
+</table>
+
+<h2>2.3 Task Filtering and Search</h2>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-15</td><td>The system shall allow filtering tasks by status (To Do / In Progress / Done).</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-16</td><td>The system shall allow filtering tasks by priority (Low / Medium / High).</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-17</td><td>The system shall allow filtering tasks by category.</td><td><span class="badge should">SHOULD</span></td></tr>
+  <tr><td>FR-18</td><td>The system shall allow searching tasks by a keyword that is matched against the task title.</td><td><span class="badge should">SHOULD</span></td></tr>
+  <tr><td>FR-19</td><td>The dashboard shall display statistics: total, to-do, in-progress, and done task counts.</td><td><span class="badge could">COULD</span></td></tr>
+</table>
+
+<h2>2.4 Category Management</h2>
+<table>
+  <tr><th>ID</th><th>Requirement</th><th>Priority</th></tr>
+  <tr><td>FR-20</td><td>An authenticated user shall be able to create a category by providing a name.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-21</td><td>An authenticated user shall be able to view all their categories.</td><td><span class="badge must">MUST</span></td></tr>
+  <tr><td>FR-22</td><td>An authenticated user shall be able to delete a category. Tasks previously assigned to that category shall remain, with their category cleared.</td><td><span class="badge should">SHOULD</span></td></tr>
+  <tr><td>FR-23</td><td>An authenticated user shall be able to assign or remove a category from a task.</td><td><span class="badge must">MUST</span></td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h1>3. Non-Functional Requirements</h1>
+<table>
+  <tr><th>ID</th><th>Category</th><th>Requirement</th></tr>
+  <tr><td>NFR-01</td><td>Performance</td><td>API responses for standard operations (create, read, update, delete) must complete within 200 ms under normal single-user load.</td></tr>
+  <tr><td>NFR-02</td><td>Security</td><td>All passwords must be stored as bcrypt hashes (cost factor ≥ 10). No plain-text credentials shall appear in logs or responses.</td></tr>
+  <tr><td>NFR-03</td><td>Security</td><td>JWT tokens must be signed with HS256 and must expire after 24 hours.</td></tr>
+  <tr><td>NFR-04</td><td>Usability</td><td>The user interface must be usable on screen widths from 360 px (mobile) to 1920 px (desktop) without horizontal scrolling.</td></tr>
+  <tr><td>NFR-05</td><td>Reliability</td><td>The application must sustain 99 % uptime during normal operation on a standard server (excluding scheduled maintenance).</td></tr>
+  <tr><td>NFR-06</td><td>Maintainability</td><td>The codebase must be organised into separate backend (Node.js/Express) and frontend (HTML/CSS/JS) modules. Each backend route must reside in its own file.</td></tr>
+  <tr><td>NFR-07</td><td>Data Integrity</td><td>The database must enforce foreign key constraints. Cascading deletes must remove orphaned task and category records when a user account is deleted.</td></tr>
+  <tr><td>NFR-08</td><td>Testability</td><td>All critical API endpoints must have automated unit/integration tests with at least 80 % code coverage on business logic.</td></tr>
+  <tr><td>NFR-09</td><td>Portability</td><td>The application must run on Windows, macOS, and Linux using Node.js ≥ 18.</td></tr>
+</table>
+
+<!-- ═══════════════════════════════════════════════════════════════════════ -->
+<h1>4. Assumptions, Concepts and Constraints</h1>
+
+<h2>4.1 Assumptions</h2>
+<ul>
+  <li>Each task belongs to exactly one user; there is no task sharing between accounts in the initial release.</li>
+  <li>Users have a reliable internet connection; the application does not need offline support.</li>
+  <li>Users access the application through a modern web browser with JavaScript enabled (Chrome ≥ 90, Firefox ≥ 88, Edge ≥ 90, Safari ≥ 14).</li>
+  <li>The server environment has Node.js 18+ installed and write access to the filesystem for the SQLite database file.</li>
+  <li>The initial user base is small (fewer than 1 000 concurrent users), so SQLite is an appropriate database choice.</li>
+</ul>
+
+<h2>4.2 Conceptual Model</h2>
+<p>The core domain model is described below:</p>
+<table>
+  <tr><th>Entity</th><th>Attributes</th><th>Relationships</th></tr>
+  <tr><td>User</td><td>id, username, email, password (hashed), created_at</td><td>Has many Tasks; has many Categories</td></tr>
+  <tr><td>Task</td><td>id, title, description, status, priority, due_date, created_at, updated_at</td><td>Belongs to User; optionally belongs to one Category</td></tr>
+  <tr><td>Category</td><td>id, name</td><td>Belongs to User; has many Tasks</td></tr>
+</table>
+
+<h2>4.3 Constraints</h2>
+<ul>
+  <li><strong>Password length:</strong> Minimum 6 characters enforced at both client and server level.</li>
+  <li><strong>Task title:</strong> Mandatory; cannot be blank.</li>
+  <li><strong>Task status values:</strong> Restricted to <code>todo</code>, <code>in_progress</code>, <code>done</code> (enforced by a database CHECK constraint).</li>
+  <li><strong>Task priority values:</strong> Restricted to <code>low</code>, <code>medium</code>, <code>high</code> (enforced by a database CHECK constraint).</li>
+  <li><strong>Token expiry:</strong> JWT tokens are valid for 24 hours; clients must re-authenticate upon expiry.</li>
+  <li><strong>Category name:</strong> Cannot be empty or contain only whitespace.</li>
+  <li><strong>Database:</strong> SQLite file stored locally on the server; no external database server is required.</li>
+  <li><strong>Unique credentials:</strong> Username and email address must each be unique across all users.</li>
+</ul>
+
+<h2>4.4 Out of Scope</h2>
+<ul>
+  <li>Email verification on registration</li>
+  <li>Password reset via email</li>
+  <li>Real-time collaboration / task sharing</li>
+  <li>File attachments on tasks</li>
+  <li>Push notifications</li>
+  <li>Mobile native applications (iOS/Android)</li>
+</ul>
+
+<footer style="margin-top:60px;padding-top:16px;border-top:1px solid #e2e8f0;color:#64748b;font-size:13px;text-align:center">
+  Team01 – TaskFlow Functionality Specification | Applied Computing / Software Engineering | June 2026
+</footer>
+</body>
+</html>

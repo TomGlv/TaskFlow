@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Team01 – User Manual</title>
+<style>
+  body{font-family:Arial,sans-serif;max-width:900px;margin:40px auto;color:#1e293b;line-height:1.7;padding:0 24px}
+  h1{color:#4f46e5;border-bottom:3px solid #4f46e5;padding-bottom:10px}
+  h2{color:#1e293b;border-bottom:1px solid #e2e8f0;padding-bottom:6px;margin-top:40px}
+  h3{color:#4f46e5;margin-top:28px}
+  code,kbd{background:#f1f5f9;padding:2px 7px;border-radius:4px;font-family:'Courier New',monospace;font-size:13px}
+  pre{background:#1e293b;color:#e2e8f0;padding:16px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.5}
+  .note{background:#eff6ff;border-left:4px solid #3b82f6;padding:12px 16px;border-radius:4px;font-size:14px;margin:12px 0}
+  .warn{background:#fef3c7;border-left:4px solid #f59e0b;padding:12px 16px;border-radius:4px;font-size:14px;margin:12px 0}
+  .step{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start}
+  .step-num{background:#4f46e5;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0;margin-top:2px}
+  .step-body{flex:1}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th{background:#4f46e5;color:#fff;padding:9px 12px;text-align:left}
+  td{padding:8px 12px;border:1px solid #e2e8f0;vertical-align:top}
+  tr:nth-child(even) td{background:#f8fafc}
+  .cover{text-align:center;padding:60px 0;border:2px solid #e2e8f0;border-radius:12px;margin-bottom:40px}
+  .cover h1{border:none;font-size:32px}.cover p{color:#64748b}
+  .toc{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:18px 24px;margin-bottom:32px}
+  .toc h2{border:none;margin-top:0;font-size:16px}.toc ol{margin-left:20px}
+  .toc li{margin-bottom:4px;font-size:14px}
+  @media print{body{max-width:100%;margin:20px}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>User Manual</h1>
+  <p><strong>Application:</strong> TaskFlow – Task Management System</p>
+  <p><strong>Version:</strong> 1.0.0 &nbsp;|&nbsp; <strong>Team:</strong> Team 01 &nbsp;|&nbsp; <strong>Date:</strong> June 2026</p>
+</div>
+
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li>Introduction</li>
+    <li>System Requirements</li>
+    <li>Deployment Instructions</li>
+    <li>Getting Started — Creating an Account</li>
+    <li>Signing In and Out</li>
+    <li>Managing Tasks</li>
+    <li>Filtering and Searching Tasks</li>
+    <li>Managing Categories</li>
+    <li>Troubleshooting</li>
+  </ol>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h1>1. Introduction</h1>
+<p><strong>TaskFlow</strong> is a web-based personal task management application. It allows you to create, organise, and track your tasks using categories, priorities, and statuses — all from any modern web browser.</p>
+
+<p>Key features:</p>
+<ul>
+  <li>Secure account registration and login</li>
+  <li>Create, edit, and delete tasks with titles, descriptions, priorities, and due dates</li>
+  <li>Organise tasks with custom categories</li>
+  <li>Filter tasks by status, priority, or category</li>
+  <li>Search tasks by keyword</li>
+  <li>One-click toggle to mark tasks as done</li>
+</ul>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h1>2. System Requirements</h1>
+
+<h3>To run the server (deployment)</h3>
+<table>
+  <tr><th>Component</th><th>Minimum</th><th>Recommended</th></tr>
+  <tr><td>Operating System</td><td>Windows 10 / macOS 11 / Ubuntu 20.04</td><td>Windows 11 / macOS 14 / Ubuntu 22.04</td></tr>
+  <tr><td>Node.js</td><td>18.0.0</td><td>20 LTS or newer</td></tr>
+  <tr><td>RAM</td><td>512 MB</td><td>1 GB+</td></tr>
+  <tr><td>Disk</td><td>100 MB</td><td>500 MB+</td></tr>
+  <tr><td>Network</td><td>Port 3000 accessible</td><td>HTTPS reverse proxy</td></tr>
+</table>
+
+<h3>To use the application (end user)</h3>
+<table>
+  <tr><th>Requirement</th><th>Detail</th></tr>
+  <tr><td>Web browser</td><td>Chrome ≥ 90, Firefox ≥ 88, Edge ≥ 90, Safari ≥ 14</td></tr>
+  <tr><td>JavaScript</td><td>Must be enabled</td></tr>
+  <tr><td>Network</td><td>Access to the server URL</td></tr>
+</table>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h1>3. Deployment Instructions</h1>
+
+<h2>3.1 Install Node.js</h2>
+<div class="step">
+  <div class="step-num">1</div>
+  <div class="step-body">Download the Node.js LTS installer from <strong>nodejs.org</strong> and run it. Verify the installation by opening a terminal and running:<br><code>node --version</code> and <code>npm --version</code></div>
+</div>
+
+<h2>3.2 Get the source code</h2>
+<div class="step">
+  <div class="step-num">2</div>
+  <div class="step-body">Copy the <code>Team01_Project</code> folder to the server (e.g. <code>C:\TaskFlow</code> or <code>/opt/taskflow</code>).</div>
+</div>
+
+<h2>3.3 Install dependencies</h2>
+<div class="step">
+  <div class="step-num">3</div>
+  <div class="step-body">Open a terminal, navigate to the backend folder, and install dependencies:
+<pre>cd Team01_Project/backend
+npm install</pre>
+  </div>
+</div>
+
+<div class="note"><strong>Note:</strong> The <code>better-sqlite3</code> package compiles a native module. On Windows ensure you have the <em>Windows Build Tools</em> installed (<code>npm install -g windows-build-tools</code> in an administrator PowerShell).</div>
+
+<h2>3.4 Configure environment (optional)</h2>
+<div class="step">
+  <div class="step-num">4</div>
+  <div class="step-body">You may set these environment variables before starting the server:
+  <table>
+    <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
+    <tr><td><code>PORT</code></td><td>3000</td><td>TCP port the server listens on</td></tr>
+    <tr><td><code>JWT_SECRET</code></td><td>taskflow_secret_2024</td><td>Secret key used to sign JWT tokens — change this in production</td></tr>
+  </table>
+  </div>
+</div>
+
+<h2>3.5 Start the server</h2>
+<div class="step">
+  <div class="step-num">5</div>
+  <div class="step-body">Start the server with:
+<pre>node server.js</pre>
+  You should see: <code>TaskFlow server running on http://localhost:3000</code>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-num">6</div>
+  <div class="step-body">Open your browser and navigate to <code>http://localhost:3000</code> (or the server's IP address and port). The TaskFlow login page should appear.</div>
+</div>
+
+<h2>3.6 Run automated tests</h2>
+<pre>npm test</pre>
+<p>Jest will run all test suites and print a coverage report. All tests should pass before deployment.</p>
+
+<h2>3.7 Running in production (optional)</h2>
+<p>For a persistent server process, use <strong>PM2</strong>:</p>
+<pre>npm install -g pm2
+pm2 start server.js --name taskflow
+pm2 startup    # auto-start on reboot
+pm2 save</pre>
+
+<div class="warn"><strong>Warning:</strong> Change the <code>JWT_SECRET</code> environment variable to a long random string before exposing the application to the internet.</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h1>4. Getting Started — Creating an Account</h1>
+
+<div class="step">
+  <div class="step-num">1</div>
+  <div class="step-body">Open the application in your browser. The <strong>Login</strong> page appears.</div>
+</div>
+<div class="step">
+  <div class="step-num">2</div>
+  <div class="step-body">Click the <strong>"Create one"</strong> link at the bottom of the form. You are taken to the <strong>Register</strong> page.</div>
+</div>
+<div class="step">
+  <div class="step-num">3</div>
+  <div class="step-body">Fill in the three fields:
+    <ul>
+      <li><strong>Username</strong> — a unique display name (e.g. <em>johndoe</em>)</li>
+      <li><strong>Email address</strong> — your email (e.g. <em>john@example.com</em>)</li>
+      <li><strong>Password</strong> — at least 6 characters</li>
+    </ul>
+  </div>
+</div>
+<div class="step">
+  <div class="step-num">4</div>
+  <div class="step-body">Click <strong>"Create Account"</strong>. If all fields are valid you are automatically logged in and taken to the Dashboard.</div>
+</div>
+
+<div class="note">If you see a red error banner, read the message: it will tell you if your email is already in use, your username is taken, or your password is too short.</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h1>5. Signing In and Out</h1>
+
+<h3>Sign in</h3>
+<div class="step">
+  <div class="step-num">1</div><div class="step-body">On the Login page enter your <strong>email</strong> and <strong>password</strong>.</div>
+</div>
+<div class="step">
+  <div class="step-num">2</div><div class="step-body">Click <strong>"Sign In"</strong>. You are redirected to your Dashboard.</div>
+</div>
+
+<h3>Sign out</h3>
+<div class="step">
+  <div class="step-num">1</div><div class="step-body">In the top-right corner of any page, click the <strong>"Logout"</strong> button. Your session is cleared and you are returned to the Login page.</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h1>6. Managing Tasks</h1>
+
+<h2>6.1 Create a new task</h2>
+<div class="step">
+  <div class="step-num">1</div><div class="step-body">On the Dashboard, click the blue <strong>"+ New Task"</strong> button in the top-right of the content area. The task modal opens.</div>
+</div>
+<div class="step">
+  <div class="step-num">2</div><div class="step-body">Enter a <strong>Title</strong> (required). Optionally add:
+    <ul>
+      <li><strong>Description</strong> — extra details about the task</li>
+      <li><strong>Status</strong> — To Do / In Progress / Done (default: To Do)</li>
+      <li><strong>Priority</strong> — Low / Medium / High (default: Medium)</li>
+      <li><strong>Due Date</strong> — a date by which the task should be completed</li>
+      <li><strong>Category</strong> — group the task under a category you have created</li>
+    </ul>
+  </div>
+</div>
+<div class="step">
+  <div class="step-num">3</div><div class="step-body">Click <strong>"Save Task"</strong>. The modal closes and the new task appears at the top of the task list.</div>
+</div>
+
+<h2>6.2 Edit a task</h2>
+<div class="step">
+  <div class="step-num">1</div><div class="step-body">Click anywhere on a task card (not the checkbox). The task modal opens with the current values pre-filled.</div>
+</div>
+<div class="step">
+  <div class="step-num">2</div><div class="step-body">Modify any field and click <strong>"Save Task"</strong>.</div>
+</div>
+
+<h2>6.3 Mark a task as done (quick toggle)</h2>
+<div class="step">
+  <div class="step-num">1</div><div class="step-body">Click the <strong>circular checkbox</strong> on the left side of the task card. The task is immediately marked as <em>Done</em> (title is struck through). Click again to return to <em>To Do</em>.</div>
+</div>
+
+<h2>6.4 Delete a task</h2>
+<div class="step">
+  <div class="step-num">1</div><div class="step-body">Open the task by clicking its card.</div>
+</div>
+<div class="step">
+  <div class="step-num">2</div><div class="step-body">Click the red <strong>"Delete"</strong> button (bottom-left of the modal).</div>
+</div>
+<div class="step">
+  <div class="step-num">3</div><div class="step-body">Confirm the deletion in the browser dialog. The task is permanently removed.</div>
+</div>
+
+<h2>6.5 Understanding task cards</h2>
+<table>
+  <tr><th>Element</th><th>Meaning</th></tr>
+  <tr><td>Coloured left border</td><td>Red = High priority, Yellow = Medium, Green = Low</td></tr>
+  <tr><td>Circular checkbox</td><td>Filled green = Done; empty = not done</td></tr>
+  <tr><td>Status badge</td><td>Current status: To Do / In Progress / Done</td></tr>
+  <tr><td>Priority badge</td><td>Low / Medium / High</td></tr>
+  <tr><td>Category badge</td><td>The category name (if assigned)</td></tr>
+  <tr><td>Due date badge</td><td>The due date (if set)</td></tr>
+</table>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h1>7. Filtering and Searching Tasks</h1>
+
+<h3>Filter by status</h3>
+<p>In the left sidebar, open the <strong>Status</strong> dropdown and select <em>To Do</em>, <em>In Progress</em>, or <em>Done</em>. The task list updates immediately. Select <em>All</em> to remove the filter.</p>
+
+<h3>Filter by priority</h3>
+<p>Use the <strong>Priority</strong> dropdown in the sidebar to show only tasks of a given priority level.</p>
+
+<h3>Filter by category</h3>
+<p>Use the <strong>Category</strong> dropdown to show only tasks belonging to a specific category.</p>
+
+<h3>Search by keyword</h3>
+<p>Type a word or phrase in the <strong>Search tasks…</strong> box at the top of the content area. The list filters automatically as you type (with a short 300 ms delay). Clear the box to show all tasks again.</p>
+
+<div class="note">You can combine multiple filters simultaneously. For example, you can filter for <em>High priority + In Progress</em> tasks at the same time.</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h1>8. Managing Categories</h1>
+
+<h2>8.1 Create a category</h2>
+<div class="step">
+  <div class="step-num">1</div><div class="step-body">In the left sidebar, scroll to the <strong>Categories</strong> section.</div>
+</div>
+<div class="step">
+  <div class="step-num">2</div><div class="step-body">Type the category name in the input field (e.g. <em>Work</em>, <em>Personal</em>, <em>Study</em>).</div>
+</div>
+<div class="step">
+  <div class="step-num">3</div><div class="step-body">Click <strong>"Add"</strong>. The new category appears in the sidebar list and in all category dropdowns.</div>
+</div>
+
+<h2>8.2 Assign a category to a task</h2>
+<div class="step">
+  <div class="step-num">1</div><div class="step-body">Open the New Task or Edit Task modal.</div>
+</div>
+<div class="step">
+  <div class="step-num">2</div><div class="step-body">In the <strong>Category</strong> dropdown, select the desired category.</div>
+</div>
+<div class="step">
+  <div class="step-num">3</div><div class="step-body">Save the task. The category badge appears on the task card.</div>
+</div>
+
+<h2>8.3 Delete a category</h2>
+<div class="step">
+  <div class="step-num">1</div><div class="step-body">In the sidebar, click the <strong>×</strong> button next to the category name.</div>
+</div>
+<div class="step">
+  <div class="step-num">2</div><div class="step-body">The category is removed. Tasks previously assigned to it remain, but their category is cleared.</div>
+</div>
+
+<div class="warn"><strong>Warning:</strong> Category deletion is permanent and cannot be undone.</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h1>9. Troubleshooting</h1>
+<table>
+  <tr><th>Problem</th><th>Likely cause</th><th>Solution</th></tr>
+  <tr>
+    <td>Page shows "Loading tasks…" forever</td>
+    <td>Server not running or wrong URL</td>
+    <td>Check that the Node.js server is running on port 3000 and visit <code>http://localhost:3000</code></td>
+  </tr>
+  <tr>
+    <td>"Invalid or expired token" error</td>
+    <td>JWT token expired after 24 h</td>
+    <td>Log out and log in again</td>
+  </tr>
+  <tr>
+    <td>Registration error: "Username or email already exists"</td>
+    <td>Duplicate credentials</td>
+    <td>Use a different username or email address</td>
+  </tr>
+  <tr>
+    <td>Task not saving, modal stays open</td>
+    <td>Title field is empty</td>
+    <td>The title field is required — fill it in and try again</td>
+  </tr>
+  <tr>
+    <td>Cannot install <code>better-sqlite3</code> on Windows</td>
+    <td>Missing native build tools</td>
+    <td>Run <code>npm install -g windows-build-tools</code> as administrator, then <code>npm install</code> again</td>
+  </tr>
+  <tr>
+    <td>Server exits immediately after start</td>
+    <td>Port 3000 already in use</td>
+    <td>Set <code>PORT=3001</code> environment variable, or stop the process occupying port 3000</td>
+  </tr>
+  <tr>
+    <td>Tests fail with "cannot find module"</td>
+    <td>Dependencies not installed</td>
+    <td>Run <code>npm install</code> inside the <code>backend</code> folder</td>
+  </tr>
+</table>
+
+<footer style="margin-top:60px;padding-top:16px;border-top:1px solid #e2e8f0;color:#64748b;font-size:13px;text-align:center">
+  Team01 – TaskFlow User Manual v1.0.0 | Applied Computing / Software Engineering | June 2026
+</footer>
+</body>
+</html>

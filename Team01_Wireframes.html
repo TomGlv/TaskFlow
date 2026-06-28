@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Team01 – Wireframes</title>
+<style>
+  body{font-family:Arial,sans-serif;max-width:960px;margin:40px auto;color:#1e293b;line-height:1.5;padding:0 24px}
+  h1{color:#4f46e5;border-bottom:3px solid #4f46e5;padding-bottom:10px}
+  h2{color:#1e293b;margin-top:48px;font-size:20px;border-bottom:1px solid #e2e8f0;padding-bottom:6px}
+  h3{color:#4f46e5;font-size:15px;margin-top:8px;margin-bottom:4px}
+  .cover{text-align:center;padding:60px 0;border:2px solid #e2e8f0;border-radius:12px;margin-bottom:40px}
+  .cover h1{border:none;font-size:32px}.cover p{color:#64748b}
+  /* Wireframe container */
+  .wf-wrap{display:flex;gap:32px;align-items:flex-start;margin:20px 0 40px}
+  .wf-box{font-family:'Courier New',monospace;font-size:12px;white-space:pre;
+          border:1px solid #94a3b8;background:#f8fafc;padding:14px 16px;
+          border-radius:4px;flex:1;line-height:1.4;overflow-x:auto}
+  .wf-desc{flex:1;font-size:14px}
+  .wf-desc ul{margin-left:20px}
+  .wf-desc li{margin-bottom:6px}
+  .flow-wrap{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0 40px}
+  .flow-step{background:#4f46e5;color:#fff;padding:8px 14px;border-radius:6px;font-size:13px;font-weight:600}
+  .flow-arrow{font-size:18px;color:#4f46e5;font-weight:700}
+  .flow-alt{background:#f1f5f9;color:#475569;border:1px solid #e2e8f0;padding:8px 14px;border-radius:6px;font-size:13px}
+  @media print{body{max-width:100%;margin:20px}.wf-wrap{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>Wireframes</h1>
+  <p><strong>Project:</strong> TaskFlow – Task Management System</p>
+  <p><strong>Team:</strong> Team 01 &nbsp;|&nbsp; <strong>Date:</strong> June 2026</p>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h1>Application Workflow Overview</h1>
+<p>The diagram below shows the high-level navigation flow between all application screens.</p>
+
+<div class="flow-wrap">
+  <div class="flow-step">Landing / Login</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step">Dashboard</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step">New Task Modal</div>
+</div>
+<div class="flow-wrap">
+  <div class="flow-alt">Register Page</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step">Dashboard</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-step">Edit Task Modal</div>
+</div>
+
+<p style="font-size:14px;color:#64748b;margin-bottom:32px">
+  Unauthenticated visitors land on the Login page. Successful login/registration redirects to the Dashboard.
+  From the Dashboard, users access New/Edit Task modals. Logout returns to the Login page.
+</p>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h2>Screen 1 – Login Page</h2>
+<div class="wf-wrap">
+<div class="wf-box">
+┌──────────────────────────────────────────┐
+│                                          │
+│          ✓  TaskFlow                     │
+│                                          │
+│      Sign in to your account             │
+│                                          │
+│  ┌────────────────────────────────────┐  │
+│  │  Email address                     │  │
+│  │  [__________________________________]│ │
+│  └────────────────────────────────────┘  │
+│                                          │
+│  ┌────────────────────────────────────┐  │
+│  │  Password                          │  │
+│  │  [__________________________________]│ │
+│  └────────────────────────────────────┘  │
+│                                          │
+│  ┌────────────────────────────────────┐  │
+│  │           Sign In                  │  │
+│  └────────────────────────────────────┘  │
+│                                          │
+│  Don't have an account? [Create one]     │
+│                                          │
+└──────────────────────────────────────────┘
+</div>
+<div class="wf-desc">
+  <h3>Elements</h3>
+  <ul>
+    <li><strong>Logo + brand name</strong> — top of the card</li>
+    <li><strong>Email input</strong> — type="email", required</li>
+    <li><strong>Password input</strong> — type="password", required</li>
+    <li><strong>Sign In button</strong> — full-width primary button</li>
+    <li><strong>Register link</strong> — navigates to Register page</li>
+    <li><strong>Error banner</strong> — shown on invalid credentials (hidden by default)</li>
+  </ul>
+  <h3>Behaviour</h3>
+  <ul>
+    <li>Form submits via JavaScript (fetch POST /api/auth/login)</li>
+    <li>On success → JWT stored in localStorage, redirect to Dashboard</li>
+    <li>On error → error banner displayed with message</li>
+    <li>Already authenticated users are redirected immediately</li>
+  </ul>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h2>Screen 2 – Register Page</h2>
+<div class="wf-wrap">
+<div class="wf-box">
+┌──────────────────────────────────────────┐
+│                                          │
+│          ✓  TaskFlow                     │
+│                                          │
+│        Create your account               │
+│                                          │
+│  [Error banner – hidden by default]      │
+│                                          │
+│  Username  [________________________]    │
+│                                          │
+│  Email     [________________________]    │
+│                                          │
+│  Password (min 6 chars)                  │
+│            [________________________]    │
+│                                          │
+│  ┌────────────────────────────────────┐  │
+│  │         Create Account             │  │
+│  └────────────────────────────────────┘  │
+│                                          │
+│  Already have an account? [Sign in]      │
+│                                          │
+└──────────────────────────────────────────┘
+</div>
+<div class="wf-desc">
+  <h3>Elements</h3>
+  <ul>
+    <li><strong>Username input</strong> — text, required, unique</li>
+    <li><strong>Email input</strong> — type="email", required, unique</li>
+    <li><strong>Password input</strong> — minlength=6</li>
+    <li><strong>Create Account button</strong> — full-width primary</li>
+    <li><strong>Login link</strong> — back to Login page</li>
+  </ul>
+  <h3>Behaviour</h3>
+  <ul>
+    <li>Calls POST /api/auth/register</li>
+    <li>On success → JWT stored, redirect to Dashboard</li>
+    <li>Duplicate email/username → 409 error shown in banner</li>
+    <li>Short password → 400 error shown in banner</li>
+  </ul>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h2>Screen 3 – Dashboard</h2>
+<div class="wf-wrap">
+<div class="wf-box">
+┌──────────────────────────────────────────────────────────────┐
+│ NAVBAR:  ✓ TaskFlow              alice  [ Logout ]           │
+├────────────────┬─────────────────────────────────────────────┤
+│ SIDEBAR        │ CONTENT AREA                                │
+│                │                                             │
+│ Filters        │  [Search tasks…]       [ + New Task ]       │
+│ Status   [▼]   │                                             │
+│ Priority [▼]   │  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐      │
+│ Category [▼]   │  │ 4    │ │ 2    │ │ 1    │ │ 1    │      │
+│                │  │Total │ │To Do │ │In Pr.│ │Done  │      │
+│ ─────────────  │  └──────┘ └──────┘ └──────┘ └──────┘      │
+│ Categories     │                                             │
+│ • Work    [×]  │  ┌──────────────────────────────────────┐  │
+│ • Personal[×]  │  │ ▐ Buy milk       [To Do] [Medium]    │  │
+│ • Study   [×]  │  └──────────────────────────────────────┘  │
+│                │  ┌──────────────────────────────────────┐  │
+│ [New cat.] [+] │  │ ▐ Ship feature   [In Progress][High] │  │
+│                │  └──────────────────────────────────────┘  │
+│                │  ┌──────────────────────────────────────┐  │
+│                │  │ ✓ Write report   [Done]   [Low]      │  │
+│                │  └──────────────────────────────────────┘  │
+└────────────────┴─────────────────────────────────────────────┘
+</div>
+<div class="wf-desc">
+  <h3>Sidebar elements</h3>
+  <ul>
+    <li>Status dropdown filter</li>
+    <li>Priority dropdown filter</li>
+    <li>Category dropdown filter</li>
+    <li>Category list with delete buttons</li>
+    <li>New category input + Add button</li>
+  </ul>
+  <h3>Content area elements</h3>
+  <ul>
+    <li>Search box (live, debounced 300 ms)</li>
+    <li>New Task button → opens modal</li>
+    <li>Statistics row: total / to-do / in-progress / done</li>
+    <li>Task cards (click to edit, checkbox to toggle done)</li>
+    <li>Left border colour = priority indicator</li>
+  </ul>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h2>Screen 4 – New / Edit Task Modal</h2>
+<div class="wf-wrap">
+<div class="wf-box">
+┌─────────────────────────────────────────────┐
+│  ████████████████  BACKDROP  ███████████████ │
+│  █  ┌───────────────────────────────────┐ █ │
+│  █  │ New Task                      [×] │ █ │
+│  █  │                                   │ █ │
+│  █  │  Title *                          │ █ │
+│  █  │  [________________________________]│ █ │
+│  █  │                                   │ █ │
+│  █  │  Description                      │ █ │
+│  █  │  [________________________________]│ █ │
+│  █  │  [________________________________]│ █ │
+│  █  │                                   │ █ │
+│  █  │  Status          Priority         │ █ │
+│  █  │  [To Do    ▼]    [Medium    ▼]    │ █ │
+│  █  │                                   │ █ │
+│  █  │  Due Date        Category         │ █ │
+│  █  │  [date picker]   [None      ▼]    │ █ │
+│  █  │                                   │ █ │
+│  █  │  [Delete]      [Cancel] [Save]    │ █ │
+│  █  └───────────────────────────────────┘ █ │
+│  █████████████████████████████████████████ │ │
+└─────────────────────────────────────────────┘
+</div>
+<div class="wf-desc">
+  <h3>Fields</h3>
+  <ul>
+    <li><strong>Title</strong> — required text input</li>
+    <li><strong>Description</strong> — optional textarea (3 rows)</li>
+    <li><strong>Status</strong> — select: To Do / In Progress / Done</li>
+    <li><strong>Priority</strong> — select: Low / Medium / High</li>
+    <li><strong>Due Date</strong> — optional date picker</li>
+    <li><strong>Category</strong> — select: None or any user category</li>
+  </ul>
+  <h3>Actions</h3>
+  <ul>
+    <li><strong>Save</strong> — creates or updates task, closes modal</li>
+    <li><strong>Cancel / ×</strong> — closes modal without saving</li>
+    <li><strong>Delete</strong> — visible only in edit mode; confirms then deletes</li>
+    <li><strong>Backdrop click</strong> — closes modal without saving</li>
+  </ul>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════════ -->
+<h2>Workflow Description</h2>
+
+<h3>Primary Flow — Create and complete a task</h3>
+<div class="flow-wrap">
+  <div class="flow-step">1. Login</div><div class="flow-arrow">→</div>
+  <div class="flow-step">2. Dashboard</div><div class="flow-arrow">→</div>
+  <div class="flow-step">3. Click "+ New Task"</div><div class="flow-arrow">→</div>
+  <div class="flow-step">4. Fill form, Save</div><div class="flow-arrow">→</div>
+  <div class="flow-step">5. Task appears in list</div><div class="flow-arrow">→</div>
+  <div class="flow-step">6. Click checkbox → Done</div>
+</div>
+
+<h3>Alternate Flow — Edit an existing task</h3>
+<div class="flow-wrap">
+  <div class="flow-step">Dashboard</div><div class="flow-arrow">→</div>
+  <div class="flow-step">Click task card</div><div class="flow-arrow">→</div>
+  <div class="flow-step">Edit Task Modal opens with data</div><div class="flow-arrow">→</div>
+  <div class="flow-step">Modify fields, Save</div><div class="flow-arrow">→</div>
+  <div class="flow-step">Task list refreshed</div>
+</div>
+
+<h3>Alternate Flow — Filter tasks</h3>
+<div class="flow-wrap">
+  <div class="flow-step">Dashboard</div><div class="flow-arrow">→</div>
+  <div class="flow-step">Select Status / Priority / Category in sidebar</div><div class="flow-arrow">→</div>
+  <div class="flow-step">Task list filters automatically</div>
+</div>
+
+<h3>Alternate Flow — Manage categories</h3>
+<div class="flow-wrap">
+  <div class="flow-step">Sidebar → type category name → Add</div><div class="flow-arrow">→</div>
+  <div class="flow-step">Category appears in sidebar and dropdowns</div>
+</div>
+<div class="flow-wrap">
+  <div class="flow-step">Sidebar → click × next to category</div><div class="flow-arrow">→</div>
+  <div class="flow-alt">Category deleted, tasks cleared (no cascade delete of tasks)</div>
+</div>
+
+<footer style="margin-top:60px;padding-top:16px;border-top:1px solid #e2e8f0;color:#64748b;font-size:13px;text-align:center">
+  Team01 – TaskFlow Wireframes | Applied Computing / Software Engineering | June 2026
+</footer>
+</body>
+</html>

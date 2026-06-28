@@ -1,0 +1,42 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{23EC52C7-CE8B-497A-96B9-A86328209031}"
+	ProjectSection(SolutionItems) = preProject
+		Team01_Project\backend\server.js = Team01_Project\backend\server.js
+		Team01_Project\backend\database.js = Team01_Project\backend\database.js
+		Team01_Project\backend\package.json = Team01_Project\backend\package.json
+		Team01_Project\backend\middleware\authMiddleware.js = Team01_Project\backend\middleware\authMiddleware.js
+		Team01_Project\backend\routes\auth.js = Team01_Project\backend\routes\auth.js
+		Team01_Project\backend\routes\tasks.js = Team01_Project\backend\routes\tasks.js
+		Team01_Project\backend\routes\categories.js = Team01_Project\backend\routes\categories.js
+		Team01_Project\backend\tests\setup.js = Team01_Project\backend\tests\setup.js
+		Team01_Project\backend\tests\auth.test.js = Team01_Project\backend\tests\auth.test.js
+		Team01_Project\backend\tests\tasks.test.js = Team01_Project\backend\tests\tasks.test.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "frontend", "frontend", "{877A3958-9BF9-4CEC-912B-B72228D33C0F}"
+	ProjectSection(SolutionItems) = preProject
+		Team01_Project\frontend\index.html = Team01_Project\frontend\index.html
+		Team01_Project\frontend\register.html = Team01_Project\frontend\register.html
+		Team01_Project\frontend\dashboard.html = Team01_Project\frontend\dashboard.html
+		Team01_Project\frontend\css\style.css = Team01_Project\frontend\css\style.css
+		Team01_Project\frontend\js\api.js = Team01_Project\frontend\js\api.js
+		Team01_Project\frontend\js\auth.js = Team01_Project\frontend\js\auth.js
+		Team01_Project\frontend\js\dashboard.js = Team01_Project\frontend\js\dashboard.js
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1AB6DE8-9BF0-401B-A96E-B6EB47BFD175}
+	EndGlobalSection
+EndGlobal
